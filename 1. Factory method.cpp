@@ -2,42 +2,54 @@
 
 #include <iostream>
 
+/*   Интерфейс "Продуктов" (виртуальный класс):   */
+// Груз
 class ICargo
 {
 public:
-	virtual ~ICargo() {};
 	virtual std::string Action() const = 0;
 };
 
+/*   Конкретные "Продукты":   */
+// Круглый Груз
 class RoundCargo : public ICargo
 {
 public:
+	// Конкретное действие для конкретного "Продукта"
 	std::string Action() const override
 	{
 		return "Круглое тащат";
 	}
 };
-
+// Квадратный Груз
 class SquareCargo : public ICargo
 {
 public:
+	// Конкретное действие для конкретного "Продукта"
 	std::string Action() const override
 	{
 		return "Квадратное катят";
 	}
 };
 
-
-
+/*   Интерфейс "Фабрик" (виртуальный класс):   */
+// Рабочие
 class IWorkers
 {
 public:
-	virtual ~IWorkers() {};
+	/*   "Фабричный метод" для получения "Продукта"   */
+	// Получение типа груза
 	virtual ICargo* GetCargoType() const = 0;
 
+	/*   "Фабричный метод" для вывода информации   */
+	// Вывод информации о работе
 	std::string Work() const
 	{
+		/*   Вызываем "Фабричный метод" для получения "Продукта"   */
+		// Получаем информацию о грузе
 		ICargo* cargo = this->GetCargoType();
+		/*   Вызываем функцию "Продукта"   */
+		// Получаем информацию о работе над грузом
 		std::string result = "Рабочие на данный момент " + cargo->Action();
 
 		delete cargo;
@@ -45,24 +57,30 @@ public:
 	}
 };
 
+/*   Конкретные "Фабрики":   */
+// Сильные Рабочие
 class StrongWorkers : public IWorkers
 {
 public:
+	/*   Конкретный "Продукт" для конкретной "Фабрики"   */
 	ICargo* GetCargoType() const override
 	{
 		return new RoundCargo;
 	}
 };
-
+// Ленивые Рабочие
 class LazyWorkers : public IWorkers
 {
 public:
+	/*   Конкретный "Продукт" для конкретной "Фабрики"   */
 	ICargo* GetCargoType() const override
 	{
 		return new SquareCargo;
 	}
 };
 
+/*   Код "Клиента":   */
+// Проверка, Контроль рабочих
 void Verification(const IWorkers& workers)
 {
 	std::cout << "Проверка работы рабочих:\n"
@@ -88,3 +106,8 @@ int main()
 	return 0;
 }
 
+/*   Вывод:   
+* Каждая "Фабрика" имеет свой "Продукт",
+* но все "Фабрики" имеют общий интерфейс для взаимодействия со своим "Продуктом",
+* а все "Продукты" – общий интерфейс с вызовом своей "Операции" над "Продуктом".
+*/
