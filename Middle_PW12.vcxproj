@@ -139,11 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="0. Testing.cpp" />
     <ClCompile Include="2. Abstract_Factory.cpp" />
-    <ClCompile Include="1. Factory method.cpp" />
+    <ClCompile Include="1. Factory_method.cpp" />
     <ClCompile Include="3. Builder.cpp" />
     <ClCompile Include="4. Prototype.cpp" />
     <ClCompile Include="5. Singleton.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="0. Testing.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

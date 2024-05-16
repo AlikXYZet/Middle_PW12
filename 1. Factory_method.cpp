@@ -1,6 +1,7 @@
 /* ---   Фабричный метод   --- */
 
 #include <iostream>
+#include "0. Testing.h"
 
 /*   Интерфейс "Продуктов" (виртуальный класс):   */
 // Груз
@@ -87,9 +88,9 @@ void Verification(const IWorkers& workers)
 		<< workers.Work() << std::endl;
 }
 
-int main()
+int main1()
 {
-	setlocale(LC_ALL, "Russian");
+	//setlocale(LC_ALL, "Russian");
 
 	std::cout << "Работают Сильные рабочие.\n";
 	IWorkers* Group_No1 = new StrongWorkers;
