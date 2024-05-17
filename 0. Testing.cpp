@@ -2,7 +2,7 @@
 #include "0. Testing.h"
 
 //Выбор по умолчанию
-int DefaultSelection = 4;
+int DefaultSelection = 5;
 
 bool MainSelection(int sel)
 {
@@ -51,6 +51,8 @@ int main()
 	int Selection;
 	std::cin >> Selection;
 	std::cout << std::endl;
+
+	DefaultSelection = ((DefaultSelection - 1) % 5) + 1;
 
 	if (MainSelection(Selection))
 		MainSelection(DefaultSelection);
