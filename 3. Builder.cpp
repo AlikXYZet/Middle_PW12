@@ -1,8 +1,8 @@
-/* ---   Строитель   --- */
+п»ї/* ---   РЎС‚СЂРѕРёС‚РµР»СЊ   --- */
 
 #include "0. Testing.h"
 
-/*   Класс "Продукта":   */
+/*   РљР»Р°СЃСЃ "РџСЂРѕРґСѓРєС‚Р°":   */
 class Product
 {
 public:
@@ -10,7 +10,7 @@ public:
 	int ValueSound;
 	int ValueLift;
 
-	// Перегрузка operator<< для вывода значений
+	// РџРµСЂРµРіСЂСѓР·РєР° operator<< РґР»СЏ РІС‹РІРѕРґР° Р·РЅР°С‡РµРЅРёР№
 	friend std::ostream& operator<<(std::ostream& out, const Product& p)
 	{
 		if (p.ValueLight)
@@ -26,96 +26,96 @@ public:
 	}
 };
 
-/*   Интерфейс "Строителя":   */
-// Контроллер
+/*   РРЅС‚РµСЂС„РµР№СЃ "РЎС‚СЂРѕРёС‚РµР»СЏ":   */
+// РљРѕРЅС‚СЂРѕР»Р»РµСЂ
 class IController
 {
 public:
-	/*   Создающие методы:   */
-	// Функция создания продукта
+	/*   РЎРѕР·РґР°СЋС‰РёРµ РјРµС‚РѕРґС‹:   */
+	// Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РїСЂРѕРґСѓРєС‚Р°
 	virtual void CreateProduct() {};
-	// Функции добавления контроля
-	virtual void AddLightСontrol(int value) {};
-	virtual void AddSoundСontrol(int value) {};
-	virtual void AddLiftСontrol(int value) {};
+	// Р¤СѓРЅРєС†РёРё РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕРЅС‚СЂРѕР»СЏ
+	virtual void AddLightРЎontrol(int value) {};
+	virtual void AddSoundРЎontrol(int value) {};
+	virtual void AddLiftРЎontrol(int value) {};
 };
 
-/*   Конкректный "Строитель":   */
-// Конкректный Контроллер
+/*   РљРѕРЅРєСЂРµРєС‚РЅС‹Р№ "РЎС‚СЂРѕРёС‚РµР»СЊ":   */
+// РљРѕРЅРєСЂРµРєС‚РЅС‹Р№ РљРѕРЅС‚СЂРѕР»Р»РµСЂ
 class ConcreteController : public IController
 {
 private:
-	Product* СurrentProduct;
+	Product* РЎurrentProduct;
 
 public:
 
-	// Реализация виртуальных методов
+	// Р РµР°Р»РёР·Р°С†РёСЏ РІРёСЂС‚СѓР°Р»СЊРЅС‹С… РјРµС‚РѕРґРѕРІ
 	void CreateProduct() override
 	{
 		//std::cout << "ConcreteBuilder::CreateProduct()" << std::endl;
-		СurrentProduct = new Product();
+		РЎurrentProduct = new Product();
 	}
 
-	void AddLightСontrol(int value) override
+	void AddLightРЎontrol(int value) override
 	{
 		//std::cout << "ConcreteBuilder::CurrentProduct->ValueLight = " << value << std::endl;
-		СurrentProduct->ValueLight = value;
+		РЎurrentProduct->ValueLight = value;
 	}
 
-	void AddSoundСontrol(int value) override
+	void AddSoundРЎontrol(int value) override
 	{
 		//std::cout << "ConcreteBuilder::CurrentProduct->ValueSound = " << value << std::endl;
-		СurrentProduct->ValueSound = value;
+		РЎurrentProduct->ValueSound = value;
 	}
 
-	void AddLiftСontrol(int value) override
+	void AddLiftРЎontrol(int value) override
 	{
 		//std::cout << "ConcreteBuilder::CurrentProduct->ValueLift = " << value << std::endl;
-		СurrentProduct->ValueLift = value;
+		РЎurrentProduct->ValueLift = value;
 	}
 
-	// Метод возврата продукта для клиента
+	// РњРµС‚РѕРґ РІРѕР·РІСЂР°С‚Р° РїСЂРѕРґСѓРєС‚Р° РґР»СЏ РєР»РёРµРЅС‚Р°
 	virtual Product* GetResult()
 	{
-		return СurrentProduct;
+		return РЎurrentProduct;
 	}
 };
 
-/*   Класс "Директор":   */
+/*   РљР»Р°СЃСЃ "Р”РёСЂРµРєС‚РѕСЂ":   */
 class Director
 {
 public:
-	// Метод, добавления контроля всех вариаций
+	// РњРµС‚РѕРґ, РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕРЅС‚СЂРѕР»СЏ РІСЃРµС… РІР°СЂРёР°С†РёР№
 	void ConstructAll(IController& controller)
 	{
 		controller.CreateProduct();
-		controller.AddLightСontrol(10);
-		controller.AddSoundСontrol(50);
-		controller.AddLiftСontrol(80);
+		controller.AddLightРЎontrol(10);
+		controller.AddSoundРЎontrol(50);
+		controller.AddLiftРЎontrol(80);
 	}
 
-	// Светомузыка: Метод, добавления контроля Света и Звука
+	// РЎРІРµС‚РѕРјСѓР·С‹РєР°: РњРµС‚РѕРґ, РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕРЅС‚СЂРѕР»СЏ РЎРІРµС‚Р° Рё Р—РІСѓРєР°
 	void Light_Music(IController& controller)
 	{
 		controller.CreateProduct();
-		controller.AddLightСontrol(30);
-		controller.AddSoundСontrol(30);
+		controller.AddLightРЎontrol(30);
+		controller.AddSoundРЎontrol(30);
 	}
 
-	// Лифт: Метод, добавления контроля Звука и Подъёма
+	// Р›РёС„С‚: РњРµС‚РѕРґ, РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕРЅС‚СЂРѕР»СЏ Р—РІСѓРєР° Рё РџРѕРґСЉС‘РјР°
 	void Elevator(IController& controller)
 	{
 		controller.CreateProduct();
-		controller.AddSoundСontrol(20);
-		controller.AddLiftСontrol(80);
+		controller.AddSoundРЎontrol(20);
+		controller.AddLiftРЎontrol(80);
 	}
 
-	// Автоподъёмник: Метод, добавления контроля Света и Подъёма
+	// РђРІС‚РѕРїРѕРґСЉС‘РјРЅРёРє: РњРµС‚РѕРґ, РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕРЅС‚СЂРѕР»СЏ РЎРІРµС‚Р° Рё РџРѕРґСЉС‘РјР°
 	void Autolift(IController& controller)
 	{
 		controller.CreateProduct();
-		controller.AddLightСontrol(100);
-		controller.AddLiftСontrol(30);
+		controller.AddLightРЎontrol(100);
+		controller.AddLiftРЎontrol(30);
 	}
 };
 
@@ -147,13 +147,13 @@ int main3()
 	return 0;
 }
 
-/*   Вывод:
-* Патерн используется для получения продукта с конкректными характеристиками:
-* инициализация уже встроенных в продукт переменных (в данном случае)
-* или добавление функционала (при реализации "Продукта" со встроенным дин.массивом)
+/*   Р’С‹РІРѕРґ:
+* РџР°С‚РµСЂРЅ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РїСЂРѕРґСѓРєС‚Р° СЃ РєРѕРЅРєСЂРµРєС‚РЅС‹РјРё С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°РјРё:
+* РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СѓР¶Рµ РІСЃС‚СЂРѕРµРЅРЅС‹С… РІ РїСЂРѕРґСѓРєС‚ РїРµСЂРµРјРµРЅРЅС‹С… (РІ РґР°РЅРЅРѕРј СЃР»СѓС‡Р°Рµ)
+* РёР»Рё РґРѕР±Р°РІР»РµРЅРёРµ С„СѓРЅРєС†РёРѕРЅР°Р»Р° (РїСЂРё СЂРµР°Р»РёР·Р°С†РёРё "РџСЂРѕРґСѓРєС‚Р°" СЃРѕ РІСЃС‚СЂРѕРµРЅРЅС‹Рј РґРёРЅ.РјР°СЃСЃРёРІРѕРј)
 * 
-* "Строитель" реализует те или иные методы инициализации переменных или добавления функционала
-* и возвращает "Продукт" (результат используемых методов)
+* "РЎС‚СЂРѕРёС‚РµР»СЊ" СЂРµР°Р»РёР·СѓРµС‚ С‚Рµ РёР»Рё РёРЅС‹Рµ РјРµС‚РѕРґС‹ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РїРµСЂРµРјРµРЅРЅС‹С… РёР»Рё РґРѕР±Р°РІР»РµРЅРёСЏ С„СѓРЅРєС†РёРѕРЅР°Р»Р°
+* Рё РІРѕР·РІСЂР°С‰Р°РµС‚ "РџСЂРѕРґСѓРєС‚" (СЂРµР·СѓР»СЊС‚Р°С‚ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РјРµС‚РѕРґРѕРІ)
 * 
-* "Директор" реализует комбинации методов "Строителя"
+* "Р”РёСЂРµРєС‚РѕСЂ" СЂРµР°Р»РёР·СѓРµС‚ РєРѕРјР±РёРЅР°С†РёРё РјРµС‚РѕРґРѕРІ "РЎС‚СЂРѕРёС‚РµР»СЏ"
 */
