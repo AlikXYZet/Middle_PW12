@@ -4,9 +4,8 @@
 
 /*   Интерфейс "Продуктов" 1-ого типа (виртуальный класс):   */
 // Приветствие
-class IGreeting
+__interface IGreeting
 {
-public:
 	virtual std::string ToGreet() const = 0;
 };
 
@@ -35,9 +34,8 @@ public:
 
 /*   Интерфейс "Продуктов" 2-ого типа (виртуальный класс):   */
 // Прощание
-class IGoodbye
+__interface IGoodbye
 {
-public:
 	virtual std::string ToSayGoodbye() const = 0;
 };
 
@@ -66,9 +64,8 @@ public:
 
 /*   Интерфейс "Фабрик" (виртуальный класс):   */
 // Рабочие
-class IHuman
+__interface IHuman
 {
-public:
 	/*   "Фабричный метод" для получения "Продукта" 1-ого типа   */
 	// Получение типа приветствия
 	virtual IGreeting* GetGreeting() const = 0;

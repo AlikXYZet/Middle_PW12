@@ -3,9 +3,8 @@
 #include "0. Testing.h"
 
 /*   Интерфейс "Прототипа":   */
-class IPrototype
+__interface IPrototype
 {
-public:
 	virtual IPrototype* clone() = 0;
 	virtual void StageName() = 0;
 };

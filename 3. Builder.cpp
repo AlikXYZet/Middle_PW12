@@ -28,9 +28,8 @@ public:
 
 /*   Интерфейс "Строителя":   */
 // Контроллер
-class IController
+__interface IController
 {
-public:
 	/*   Создающие методы:   */
 	// Функция создания продукта
 	virtual void CreateProduct() {};
